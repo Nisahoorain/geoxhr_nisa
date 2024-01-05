@@ -10,22 +10,16 @@ import schedule
 import threading
 import time
 from flask_mail import Mail, Message
+import schedule
+import threading
+import time
+from app.model import *
+from datetime import datetime, timedelta
+from sqlalchemy import desc, exists, func, case,or_, extract ,and_
+
 
 # Flask Application
 app = Flask(__name__)
-
-app.config['MAIL_SERVER'] = 'mail.geoxhr.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'geoxhrnotifier@geoxhr.com'
-app.config['MAIL_PASSWORD'] = 'Upwork123??'
-app.config['MAIL_DEFAULT_SENDER'] = 'geoxhrnotifier@geoxhr.com'
-mail = Mail(app)
-
-
-def run_background_task():
-    from app import background
-
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')

@@ -243,8 +243,8 @@ def logoutforcandidate():
     session.clear()
     return redirect(url_for('logincandidate'))
 
-# engine = create_engine('mysql+pymysql://hayat:Hayat_admin123@ec2-15-156-80-22.ca-central-1.compute.amazonaws.com/geoxhrdb')
-engine = create_engine('mysql+pymysql://hayat:Hayat123_admin@localhost/geoxhr')
+engine = create_engine('mysql+pymysql://hayat:Hayat_admin123@ec2-15-156-80-22.ca-central-1.compute.amazonaws.com/geoxhrdb')
+# engine = create_engine('mysql+pymysql://hayat:Hayat123_admin@localhost/geoxhr')
 #
 
 # Create a session factory
@@ -266,6 +266,7 @@ def index():
     totalcandidate = Emails_data.query.filter(Emails_data.action == 'Interested').count()
     action = 'Interested'
     alldata = Emails_data.query.filter(Emails_data.action == action).order_by(desc(Emails_data.id)).all()
+    task = "default task value"  # Set a default value
 
     if role == 'user':
         totalforms = allforms_data.query.filter(allforms_data.user_id == user_id).count()
@@ -289,7 +290,6 @@ def index():
         weekend = friday.strftime("%Y-%m-%d")
         print("Week start:", weekstart)
         print("Week end:", weekend)
-        task = "default task value"  # Set a default value
 
         existing_entries = Targets.query.filter_by(
             weekstart=weekstart,
@@ -2492,7 +2492,7 @@ def resumesent():
                                  </body>
                                  </html>
                                  '''
-                recipients = ['notify@geoxhr.com ','nhoorain161@gmail.com']
+                recipients = ['notify@geoxhr.com','nhoorain161@gmail.com']
                 msg = Message(subject=email_subject, recipients=recipients, html=email_body)
                 mail.send(msg)
             else:
@@ -3229,7 +3229,7 @@ def savetarget():
 
         # Now, 'emails' contains the email addresses of the users associated with the collected data
         print(emails)
-        recipients=['nhoorain161@gmail.com']
+        recipients=['nhoorain161@gmail.com','notify@geoxhr.com']
         recipients2 = emails
         user_name = session['user']
         user_email = session['email']
@@ -3405,7 +3405,7 @@ def send_email():
 
 
         subj = f"weekly target report ({weekstart}-{weekend})"
-        recipients = ['nhoorain161@gmail.com']
+        recipients = ['nhoorain161@gmail.com','notify@geoxhr.com']
         user_email_subject = subj
         email_body = f'''
             <!DOCTYPE html>
@@ -3502,8 +3502,7 @@ def send_email():
 
 
 def start_scheduler():
-    schedule.every().friday.at("15:30").do(send_email)
-
+    schedule.every().friday.at("11:00").do(send_email)
     while True:
         schedule.run_pending()
         time.sleep(1)

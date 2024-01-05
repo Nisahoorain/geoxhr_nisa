@@ -7,8 +7,8 @@ class Config(object):
     # Set up the App SECRET_KEY
     SECRET_KEY = os.getenv('SECRET_KEY', 'Geoxhr123??')
 
-    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://hayat:Hayat_admin123@ec2-15-156-80-22.ca-central-1.compute.amazonaws.com/geoxhrdb'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://hayat:Hayat123_admin@localhost/geoxhr'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://hayat:Hayat_admin123@ec2-15-156-80-22.ca-central-1.compute.amazonaws.com/geoxhrdb'
+    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/geoxhr'
 
 
 
@@ -34,20 +34,20 @@ class ProductionConfig(Config):
 
 
 # PostgreSQL database
-#     SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
-#         os.getenv('DB_ENGINE'   , 'mysql'),
-#         os.getenv('DB_USERNAME' , 'hayat'),
-#         os.getenv('DB_PASS'     , 'Hayat_admin123'),
-#         os.getenv('DB_HOST'     , 'ec2-15-156-80-22.ca-central-1.compute.amazonaws.com'),
-#         os.getenv('DB_PORT'     , 3306),
-#         os.getenv('DB_NAME'     , 'geoxhrdb')
     SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
         os.getenv('DB_ENGINE'   , 'mysql'),
         os.getenv('DB_USERNAME' , 'hayat'),
-        os.getenv('DB_PASS'     , 'Hayat123_admin'),
-        os.getenv('DB_HOST'     , 'localhost'),
+        os.getenv('DB_PASS'     , 'Hayat_admin123'),
+        os.getenv('DB_HOST'     , 'ec2-15-156-80-22.ca-central-1.compute.amazonaws.com'),
         os.getenv('DB_PORT'     , 3306),
-        os.getenv('DB_NAME'     , 'geoxhr')
+        os.getenv('DB_NAME'     , 'geoxhrdb')
+    # SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
+    #     os.getenv('DB_ENGINE'   , 'mysql'),
+    #     os.getenv('DB_USERNAME' , 'root'),
+    #     os.getenv('DB_PASS'     , ''),
+    #     os.getenv('DB_HOST'     , 'localhost'),
+    #     os.getenv('DB_PORT'     , 3306),
+    #     os.getenv('DB_NAME'     , 'geoxhr')
     )
 #     )
 
